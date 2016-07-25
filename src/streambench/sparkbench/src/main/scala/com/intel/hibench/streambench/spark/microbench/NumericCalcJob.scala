@@ -61,8 +61,6 @@ class NumericCalcJob(subClassParams: ParamEntity, fieldIndex: Int, separator: St
           Iterator.empty
       })
 
-      lines.foreachRDD ( rdd =>  BenchLogUtil.logMsg(rdd))
-
       var zero = new MultiReducer()
       val cur = numbers.map(x => new MultiReducer(x, x, x, 1))
         .fold(zero)((v1, v2) => v1.reduce(v2))
