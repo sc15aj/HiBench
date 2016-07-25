@@ -30,10 +30,11 @@
     <module>datagen</module>
     <module>zkHelper</module>
     <module>sparkbench</module>
-    <module>stormbench</module>
-    <module>gearpumpbench</module>
-    <module>flinkbench</module>
     <!--
+     <module>stormbench</module>
+     <module>gearpumpbench</module>
+     <module>flinkbench</module>
+
       <module>samzabench</module>
     -->
   </modules>

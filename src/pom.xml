@@ -106,11 +106,11 @@
   </build>
 
   <modules>
-    <module>nutchindexing</module>
+    <!--<module>nutchindexing</module>
     <module>mahout</module>
-    <module>hivebench</module>
+    <module>hivebench</module> -->
     <module>sparkbench</module>
-    <module>pegasus</module>
+    <!--<module>pegasus</module> -->
     <module>autogen</module>
   </modules>
 
