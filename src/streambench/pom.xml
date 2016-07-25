@@ -12,7 +12,7 @@
     <artifactId>streambench</artifactId>
     <version>5.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>Streamingbench</name> 
+    <name>Streamingbench</name>
 
     <repositories>
       <repository>
@@ -24,12 +24,13 @@
 	<url>http://clojars.org/repo</url>
       </repository>
     </repositories>
-   
+
     <modules>
       <module>datagen</module>
       <module>zkHelper</module>
       <module>sparkbench</module>
-      <module>stormbench</module>
+      <!--<module>stormbench</module>
       <module>samzabench</module>
+        -->
     </modules>
 </project>
