@@ -94,7 +94,7 @@ object RunBench {
     // defind streaming context
     val conf = new SparkConf().setMaster(config.master).setAppName(config.benchName)
     val ssc = new StreamingContext(conf, Seconds(config.batchInterval))
-    ssc.checkpoint(config.checkpointPath)
+    //ssc.checkpoint(config.checkpointPath)
 
     // add listener to collect static information.
     // val listener = new LatencyListener(ssc, config)
