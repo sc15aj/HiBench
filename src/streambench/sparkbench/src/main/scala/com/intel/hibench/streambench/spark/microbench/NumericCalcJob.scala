@@ -23,7 +23,7 @@ import com.intel.hibench.streambench.spark.metrics.LatencyListener
 import org.apache.spark.streaming.StreamingContext
 import com.intel.hibench.streambench.spark.util.BenchLogUtil
 
-case class MultiReducer(var max: Long, var min: Long, var sum: Long, var count: Long) extends Serializable {
+case class MultiReducer(var max: Double, var min: Double, var sum: Double, var count: Long) extends Serializable {
   def this() = this(0, Int.MaxValue, 0, 0)
 
   def reduceValue(value: Long): MultiReducer = {
@@ -56,7 +56,7 @@ class NumericCalcJob(subClassParams: ParamEntity, fieldIndex: Int, separator: St
       val numbers = rdd.flatMap( line => {
         val splits = line.trim.split(sep)
         if (index < splits.length)
-          Iterator(splits(index).toLong)
+          Iterator(splits(index).toDouble)
         else
           Iterator.empty
       })
