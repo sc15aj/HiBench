@@ -50,14 +50,14 @@ topics=`$KAFKA_TOPIC_BIN --list`
 if [ ! -z "${topics//[[:blank:]]/}" ]; then
     echo "Warning, topics remain exist:"
     echo "$topics"
-    echo 
+    echo
     echo "Please wait a few more minutes or clean & restart kafka, zookeeper, then retry $0."
     exit 1
 fi
 
 # create internal topics for samza
 $KAFKA_TOPIC_BIN --create --topic "$STREAMING_SAMZA_WORDCOUNT_INTERNAL_TOPIC" --partitions ${SAMZA_PARTITIONS} --replication-factor 1
-$KAFKA_TOPIC_BIN --create --topic "$STREAMING_SAMZA_STATISTICS_INTERNAL_TOPIC" --partitions 1 --replication-factor 1
+$KAFKA_TOPIC_BIN --create --topic "$STREAMING_SAMZA_STATISTICS_INTERNAL_TOPIC" --partitions 1 --replication-factor ${SAMZA_REPLICATION_FACTOR}
 $KAFKA_TOPIC_BIN --create --topic "$STREAMING_SAMZA_DISTINCOUNT_INTERNAL_TOPIC" --partitions ${SAMZA_PARTITIONS} --replication-factor 1
 
 # create topic for bench
