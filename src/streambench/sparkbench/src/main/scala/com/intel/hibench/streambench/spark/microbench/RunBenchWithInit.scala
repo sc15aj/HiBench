@@ -33,6 +33,7 @@ class RunBenchJobWithInit(params:ParamEntity) extends SpoutTops {
     val conf = new SparkConf().setMaster(params.master)
       .setAppName(params.appName)
       .set("spark.cleaner.ttl", "7200")
+      .set("spark.eventlog.enabled", "true")
 
     var ssc:StreamingContext=null
 
