@@ -24,7 +24,7 @@ import org.apache.spark.streaming.StreamingContext
 import com.intel.hibench.streambench.spark.util.BenchLogUtil
 
 case class MultiReducer(var max: Double, var min: Double, var sum: Double, var count: Long, var mean: Double, var squareSum: Double, var standardDev: Double) extends Serializable {
-  def this() = this(0, Int.MaxValue, 0, 0, 0, 0)
+  def this() = this(0, Int.MaxValue, 0, 0, 0, 0, 0)
 
   def reduceValue(value: Long): MultiReducer = {
     this.max = Math.max(this.max, value)
