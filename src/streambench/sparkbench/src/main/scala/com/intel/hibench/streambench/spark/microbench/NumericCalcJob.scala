@@ -39,7 +39,7 @@ case class MultiReducer(var max: Double, var min: Double, var sum: Double, var c
     this.min = Math.min(this.min, that.min)
     this.sum += that.sum
     this.count += that.count
-    this.mean += this.sum/this.count
+    this.mean = this.sum/this.count
     this
   }
 }
