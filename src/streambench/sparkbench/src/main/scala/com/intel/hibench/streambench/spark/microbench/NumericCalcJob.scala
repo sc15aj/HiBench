@@ -23,8 +23,8 @@ import com.intel.hibench.streambench.spark.metrics.LatencyListener
 import org.apache.spark.streaming.StreamingContext
 import com.intel.hibench.streambench.spark.util.BenchLogUtil
 
-case class MultiReducer(var max: Double, var min: Double, var sum: Double, var count: Long, var mean: Double) extends Serializable {
-  def this() = this(0, Int.MaxValue, 0, 0, 0)
+case class MultiReducer(var max: Double, var min: Double, var sum: Double, var count: Long, var mean: Double, var squareSum: Double, var standardDev: Double) extends Serializable {
+  def this() = this(0, Int.MaxValue, 0, 0, 0, 0)
 
   def reduceValue(value: Long): MultiReducer = {
     this.max = Math.max(this.max, value)
@@ -40,6 +40,8 @@ case class MultiReducer(var max: Double, var min: Double, var sum: Double, var c
     this.sum += that.sum
     this.count += that.count
     this.mean = this.sum/this.count
+    this.squareSum += that.squareSum
+    this.standardDev = Math.sqrt((this.squareSum/this.count) - Math.pow(this.mean, 2))
     this
   }
 }
@@ -63,7 +65,7 @@ class NumericCalcJob(subClassParams: ParamEntity, fieldIndex: Int, separator: St
       })
 
       var zero = new MultiReducer()
-      val cur = numbers.map(x => new MultiReducer(x, x, x, 1, x))
+      val cur = numbers.map(x => new MultiReducer(x, x, x, 1, x, Math.pow(x,2), 0))
         .fold(zero)((v1, v2) => v1.reduce(v2))
       //var cur = numbers.aggregate(zero)((v, x) => v.reduceValue(x), (v1, v2) => v1.reduce(v2))
       history_statistics.reduce(cur)
@@ -73,6 +75,7 @@ class NumericCalcJob(subClassParams: ParamEntity, fieldIndex: Int, separator: St
       BenchLogUtil.logMsg("Current sum: " + history_statistics.sum)
       BenchLogUtil.logMsg("Current total: " + history_statistics.count)
       BenchLogUtil.logMsg("Current mean: " + history_statistics.mean)
+      BenchLogUtil.logMsg("Current standard deviation: " + history_statistics.standardDev)
 
     })
   }
