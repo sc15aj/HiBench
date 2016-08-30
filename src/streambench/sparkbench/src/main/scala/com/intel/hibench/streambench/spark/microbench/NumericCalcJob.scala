@@ -58,9 +58,10 @@ class NumericCalcJob(subClassParams: ParamEntity, fieldIndex: Int, separator: St
     lines.foreachRDD( rdd => {
       val numbers = rdd.flatMap( line => {
         val splits = line.trim.split(sep)
-        if (index < splits.length)
+        if (index < splits.length){
           Iterator(splits(index).toDouble)
           BenchLogUtil.logMsg("split lenght " + splits.length)
+      }
         else
           Iterator.empty
       })
