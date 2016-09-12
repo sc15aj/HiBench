@@ -56,8 +56,7 @@ class NumericCalcJob(subClassParams: ParamEntity, fieldIndex: Int, separator: St
     val sep = separator
 
     lines.foreachRDD( rdd => {
-        val splitRdd = rdd.map( line => line.split("\n") )
-      val numbers = splitRdd.flatMap( line => {
+      val numbers = rdd.flatMap(_.trim.split("\n")).flatMap( line => { 
         val splits = line.trim.split(sep)
         if (index < splits.length)
           Iterator(splits(index).toDouble)
