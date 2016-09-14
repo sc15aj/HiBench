@@ -5,5 +5,13 @@ This project is a fork. The original project can be find in [here](https://githu
 
 The IoT application can be found in 
 ~~~~ 
-src/main... 
+src/streambench/sparkbench/src/main/scala/com/intel/hibench/streambench/spark/microbench/NumericCalcJob.scala
 ~~~~
+
+The project can be build running in src directory
+
+~~~~
+mvn package -D spark1.6 -DskipTests
+~~~~
+
+
